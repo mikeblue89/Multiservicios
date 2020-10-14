@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Multiservicios.Data;
 
 namespace Multiservicios.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201014034155_AddAreaTrabajoToDatabase")]
+    partial class AddAreaTrabajoToDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,40 +245,6 @@ namespace Multiservicios.Data.Migrations
                     b.ToTable("AreaTrabajo");
                 });
 
-            modelBuilder.Entity("Multiservicios.Models.Categoria", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Fecha_Creacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Fecha_Modificacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Usuario_Creacion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Usuario_Modificacion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categoria");
-                });
-
             modelBuilder.Entity("Multiservicios.Models.Departamento", b =>
                 {
                     b.Property<int>("Id")
@@ -294,68 +262,6 @@ namespace Multiservicios.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Departamento");
-                });
-
-            modelBuilder.Entity("Multiservicios.Models.Marca", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Fecha_Creacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Fecha_Modificacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tipo_Activo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Usuario_Creacion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Usuario_Modificacion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Marca");
-                });
-
-            modelBuilder.Entity("Multiservicios.Models.Proveedor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CorreoContacto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreContacto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TelefonoContacto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Proveedor");
                 });
 
             modelBuilder.Entity("Multiservicios.Models.Puesto", b =>
@@ -443,7 +349,7 @@ namespace Multiservicios.Data.Migrations
                     b.HasOne("Multiservicios.Models.Departamento", "Departamento")
                         .WithMany()
                         .HasForeignKey("DepartamentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -452,13 +358,13 @@ namespace Multiservicios.Data.Migrations
                     b.HasOne("Multiservicios.Models.AreaTrabajo", "AreaTrabajo")
                         .WithMany()
                         .HasForeignKey("AreaTrabajoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Multiservicios.Models.Departamento", "Departamento")
                         .WithMany()
                         .HasForeignKey("DepartamentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

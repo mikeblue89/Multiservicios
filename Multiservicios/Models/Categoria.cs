@@ -12,7 +12,7 @@ namespace Multiservicios.Models
         public int Id { get; set; }
         [Required]
         [Display(Name = "Nombre de Categoria")]
-        public string Nombre_Categoria { get; set; }
+        public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get; set; }
         public DateTime Fecha_Creacion { get; set; }

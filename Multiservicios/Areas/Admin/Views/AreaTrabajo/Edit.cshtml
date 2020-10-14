@@ -1,0 +1,108 @@
+﻿@model Multiservicios.Models.ViewModels.DepartamentoAndAreaTrabajoViewModel
+@using Multiservicios.Extensions
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Crear Area de Trabajo</h2>
+<br />
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="border backgroundWhite row">
+    <div class="col-8 border-right">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="AreaTrabajo.DepartamentoId" />
+            <input type="hidden" asp-for="AreaTrabajo.Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="AreaTrabajo.DepartamentoId" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <select id="ddlDepartamentolist" asp-for="AreaTrabajo.DepartamentoId" disabled asp-items="Model.DepartamentoList.ToSelectListITem(Model.AreaTrabajo.DepartamentoId)" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="AreaTrabajo.Nombre" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="AreaTrabajo.Nombre" class="form-control" />
+                </div>
+                <span asp-validation-for="AreaTrabajo.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="AreaTrabajo.Descripcion" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    @Html.TextAreaFor(m => m.AreaTrabajo.Descripcion)
+                </div>
+                <span asp-validation-for="AreaTrabajo.Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-5 offset-3">
+                    <partial name="_EditAndBackToListButton" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-2 offset-1">
+        @if (Model.AreaTrabajoList.Count() > 0)
+        {
+            <p> Areas Existentes: </p>
+
+            <div id="AreaTrabajoList">
+                <ul class="list-group"></ul>
+            </div>
+        }
+    </div>
+
+
+
+</div>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function updateAreaTrabajoList() {
+            var departamentoSelected = document.getElementById("ddlDepartamentolist").value;
+            $list = $('#AreaTrabajoList');
+            $.ajax({
+                url: '/Admin/AreaTrabajo/GetAreaTrabajo/' + departamentoSelected,
+                type: 'GET',
+                dataType: 'text',
+                success: function (data) {
+                    results = JSON.parse(data);
+                    $list.html('');
+                    $list.append(' <ul class="list-group"> ');
+                    for (i in results) {
+                        $list.append('<li class="list-group-item">' + results[i].text + '</li>');
+                    }
+                    $list.append('</ul>');
+                }
+            });
+        }
+        $(document).ready(function () {
+            updateAreaTrabajoList();
+        });
+        $("#ddlDepartamentolist").on("change", function () {
+            updateAreaTrabajoList();
+        });
+    </script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: "lists",
+            menubar: 'file edit format'
+        });
+    </script>
+}
+
+

@@ -1,0 +1,100 @@
+﻿@model Multiservicios.Models.ViewModels.PuestoItemViewModel
+@using Multiservicios.Extensions
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Edit MenuItem</h2>
+<br />
+
+<form method="post" asp-action="Create" enctype="multipart/form-data">
+    <div class="border backgroundWhite row">
+        <input type="hidden" asp-for="Puesto.Id" />
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Puesto.Nombre" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Puesto.Nombre" class="form-control" />
+                </div>
+                <span asp-validation-for="Puesto.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Puesto.Descripcion" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    @Html.TextAreaFor(m => m.Puesto.Descripcion)
+                </div>
+                <span asp-validation-for="Puesto.Descripcion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Puesto.DepartamentoId" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="@Model.Puesto.DepartamentoId" id="DepartamentoId" asp-items="Model.Departamento.ToSelectListITem(Model.Puesto.DepartamentoId)" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Puesto.AreaTrabajoId" class="col-form-label"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="@Model.Puesto.AreaTrabajoId" name="AreaTrabajoId" id="AreaTrabajoId" asp-items="@(new SelectList(string.Empty,"Id","Nombre"))" class="form-control"></select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-8">
+            <div class="col-8 offset-4">
+                <partial name="_EditAndBackToListButton" model="Model.Puesto.Id" />
+            </div>
+        </div>
+
+
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: "lists",
+            menubar: 'file edit format'
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getAreaTrabajo();
+            $('#DepartamentoId').change(function () {
+                getAreaTrabajo();
+            });
+        });
+        function getAreaTrabajo() {
+            var url = '@Url.Content("~/")' + "Admin/AreaTrabajo/GetAreaTrabajo";
+            var ddlsoruce = '#DepartamentoId';
+            $.getJSON(url, { id: $(ddlsoruce).val() }, function (data) {
+                var items = '';
+                $('#AreaTrabajoId').empty();
+                $.each(data, function (i, areatrabajo) {
+                    items += "<option value='" + areatrabajo.value + "'>" + areatrabajo.text + "</option>";
+                });
+                $('#AreaTrabajoId').html(items);
+            })
+        }
+    </script>
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

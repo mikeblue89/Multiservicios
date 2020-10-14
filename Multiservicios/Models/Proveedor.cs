@@ -9,11 +9,11 @@ namespace Multiservicios.Models
     public class Proveedor
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = ("Proveedor"))]
-        public string NombreProveedor { get; set; }
+        public string Nombre { get; set; }
         public string NombreContacto { get; set; }
 
         public string CorreoContacto { get; set; }
