@@ -14,10 +14,11 @@ namespace Multiservicios.Models
         [Required]
         [Display(Name = ("Proveedor"))]
         public string Nombre { get; set; }
+        [Display(Name ="Nombre Contacto")]
         public string NombreContacto { get; set; }
-
+        [Display(Name = "Correo")]
         public string CorreoContacto { get; set; }
-
+        [Display(Name = "Telefono")]
         public string TelefonoContacto { get; set; }
 
         public string Estado { get; set; }

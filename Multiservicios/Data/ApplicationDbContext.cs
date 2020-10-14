@@ -20,6 +20,7 @@ namespace Multiservicios.Data
         public DbSet<Marca> Marca { get; set; }
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
+        public DbSet<Activo> Activo { get; set; }
     }
  
 }

@@ -1,0 +1,103 @@
+﻿@model Marca
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Crear Marca</h1>
+
+<br />
+<br />
+<form method="post" asp-action="Create" >
+    <div class="border backgroundWhite" >
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Nombre" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Nombre" class="form-control" />
+            </div>
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Tipo_Activo" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Tipo_Activo" class="form-control" />
+            </div>
+            <span asp-validation-for="Tipo_Activo" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Estado" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Estado" class="form-control" />
+            </div>
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Fecha_Creacion" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input type="date" data-val="true" asp-for="Fecha_Creacion" class="form-control" />
+            </div>
+            <span asp-validation-for="Fecha_Creacion" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario_Creacion" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Usuario_Creacion" class="form-control" />
+            </div>
+            <span asp-validation-for="Usuario_Creacion" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Fecha_Modificacion" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input type="date" data-val="true" asp-for="Fecha_Modificacion" class="form-control" />
+            </div>
+            <span asp-validation-for="Fecha_Modificacion" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario_Modificacion" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input  asp-for="Usuario_Modificacion" class="form-control" />
+            </div>
+            <span asp-validation-for="Usuario_Modificacion" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_CreateBackToListButton" />
+            </div>
+        </div>
+
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: "lists",
+        menubar: 'file edit format'
+    });
+    </script>
+}

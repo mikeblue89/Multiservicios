@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<div class="text-center centro ">
+    <br />
+    <h1>Menu Mantenimiento</h1>
+    <br /><br /><br /><br /><br />
+    <div class="d-flex justify-content-center align-self-auto">
+        <div class="row text-center">
+            <div class="col-4 nav-item centro">
+                <a class="nav-link text-dark font-weight-bold" asp-area="Inventario" asp-controller="Marca" asp-action="index"><img class="dimesion" src="~/images/nMantenimiento.png" /><br />Marcas</a>
+            </div>
+            <div class="col-4 nav-item">
+                <a class="nav-link text-dark font-weight-bold" asp-area="Inventario" asp-controller="Categoria" asp-action="Index"><img class="dimesion" src="~/images/nReporteInventario.png" /><br />Categorias</a>
+            </div>
+            <div class="col-4 nav-item">
+                <a class="nav-link text-dark font-weight-bold" asp-area="Inventario" asp-controller="Activo" asp-action="Create"><img class="dimesion" src="~/images/Altas Activo.png" /><br />Altas Activos</a>
+            </div>
+            <div class="col-4 nav-item">
+                <a class="nav-link text-dark font-weight-bold" asp-area="Inventario" asp-controller="" asp-action="Inventario"><img class="dimesion" src="~/images/BajasActivo.png" /><br />Bajas Activos</a>
+            </div>
+        </div>
+    </div>
+</div>

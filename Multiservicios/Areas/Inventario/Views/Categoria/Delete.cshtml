@@ -1,0 +1,87 @@
+﻿@model Categoria
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Eliminar Marca</h1>
+
+<br />
+<br />
+<form method="post" asp-action="Delete">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Nombre" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Nombre" readonly class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Descripcion" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Descripcion" readonly class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Estado" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Estado" readonly class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Fecha_Creacion" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Fecha_Creacion" readonly class="form-control" />
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario_Creacion" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Usuario_Creacion" readonly class="form-control" />
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Fecha_Modificacion" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Fecha_Modificacion" readonly class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario_Modificacion" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Usuario_Modificacion" readonly class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_DeleteAndBackToListButton" model="Model.Id" />
+            </div>
+        </div>
+
+    </div>
+</form>

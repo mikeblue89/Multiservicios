@@ -1,0 +1,111 @@
+﻿@model Proveedor
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Editar Proveedor</h1>
+
+<br />
+<br />
+<form method="post" asp-action="Edit">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Nombre" class="col-form-label">Nombre Proveedor</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Nombre" class="form-control" />
+            </div>
+            <span asp-validation-for="Nombre" class="text-danger">Ingrese Nombre de Completo</span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="NombreContacto" class="col-form-label">Nombre de contacto</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="NombreContacto" class="form-control" />
+            </div>
+            <span asp-validation-for="NombreContacto" class="text-danger">Nombre y Apellido</span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="CorreoContacto" class="col-form-label">Correo Electrónico</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="CorreoContacto" class="form-control" />
+            </div>
+            <span asp-validation-for="CorreoContacto" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="TelefonoContacto" class="col-form-label">Teléfono</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="TelefonoContacto" class="form-control" />
+            </div>
+            <span asp-validation-for="TelefonoContacto" class="text-danger">+Área mas número</span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Estado" class="col-form-label">Estado</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Estado" class="form-control" />
+            </div>
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </div>
+        <!-- 
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="FechaCreacion" class="col-form-label">Fecha de Creación</label>
+            </div>
+            <div class="col-5">
+                <input type="date" data-val="true" asp-for="FechaCreacion" class="form-control" />
+            </div>
+            <span asp-validation-for="FechaCreacion" class="text-danger">Fecha Completa</span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="UsuarioCreacion" class="col-form-label">Usuario Creación</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="UsuarioCreacion" class="form-control" />
+            </div>
+            <span asp-validation-for="UsuarioCreacion" class="text-danger">Nombre y Apellido</span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="FechaModificacion" class="col-form-label">Fecha de Modificación</label>
+            </div>
+            <div class="col-5">
+                <input type="date" data-val="true" asp-for="FechaModificacion" class="form-control" />
+            </div>
+            <span asp-validation-for="FechaModificacion" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="UsuarioModificacion" class="col-form-label"> Usuario Modificación</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="UsuarioModificacion" class="form-control" />
+            </div>
+            <span asp-validation-for="UsuarioModificacion" class="text-danger">Nombre y Apellido</span>
+        </div>
+            -->
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_EditAndBackToListButton" model="Model.Id" />
+            </div>
+        </div>
+            
+    </div>
+</form>
