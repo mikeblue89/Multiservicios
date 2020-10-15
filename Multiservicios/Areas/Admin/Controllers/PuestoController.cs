@@ -79,6 +79,7 @@ namespace Multiservicios.Areas.Admin.Controllers
 
 
         // POST - EDIT
+
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPOST(int? id)
@@ -87,18 +88,53 @@ namespace Multiservicios.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
             PuestoItemVm.Puesto.AreaTrabajoId = Convert.ToInt32(Request.Form["AreaTrabajoId"].ToString());
 
             if (!ModelState.IsValid)
             {
+                PuestoItemVm.AreaTrabajo = await _db.AreaTrabajo.Where(s => s.DepartamentoId == PuestoItemVm.Puesto.DepartamentoId).ToListAsync();
                 return View(PuestoItemVm);
             }
 
-            _db.Puesto.Add(PuestoItemVm.Puesto);
+
+            var puestoItemFromDb = await _db.Puesto.FindAsync(PuestoItemVm.Puesto.Id);
+            puestoItemFromDb.Nombre = PuestoItemVm.Puesto.Nombre;
+            puestoItemFromDb.Descripcion = PuestoItemVm.Puesto.Descripcion;
+            puestoItemFromDb.DepartamentoId = PuestoItemVm.Puesto.DepartamentoId;
+            puestoItemFromDb.AreaTrabajoId = PuestoItemVm.Puesto.AreaTrabajoId;
+
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        //GET - DELETE
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            PuestoItemVm.Puesto = await _db.Puesto.Include(m => m.Departamento).Include(m => m.AreaTrabajo).SingleOrDefaultAsync(m => m.Id == id);
+            PuestoItemVm.AreaTrabajo = await _db.AreaTrabajo.Where(s => s.DepartamentoId == PuestoItemVm.Puesto.DepartamentoId).ToListAsync();
+
+            if (PuestoItemVm.Puesto == null)
+            {
+                return NotFound();
+            }
+            return View(PuestoItemVm);
+        }
+
+        //POST - DELETE
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var puesto = await _db.Puesto.SingleOrDefaultAsync(m => m.Id == id);
+            _db.Puesto.Remove(puesto);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-
         }
 
 
