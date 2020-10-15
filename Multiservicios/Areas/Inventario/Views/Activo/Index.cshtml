@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Activo>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-dark">Lista de Activos</h2>
+        </div>
+        <div class="col-6 text-right">
+            <partial name="_IrMantenimiento" />
+        </div>
+    </div>
+
+    <br />
+    <div>
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.Nombre)
+                    </th>
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.Cantidad)
+                    </th>
+                    <!--
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.Fecha_Adquisicion)
+                    </th>
+                    -->
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.No_)
+                    </th>
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.Marca.Nombre)
+                    </th>
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.Categoria.Nombre)
+                    </th>
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.RutaFoto)
+                    </th>
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.Estado)
+                    </th>
+                    <!--
+
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.Motivo_Baja)
+                    </th>
+
+                    -->
+
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.Descripcion)
+                    </th>
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.Proveedor.Nombre)
+                    </th>
+
+
+                    <th class="bg-dark"></th>
+                    <th class="bg-dark"></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Cantidad)
+                </td>
+                <!--
+    <th class="text-white bg-dark">
+        @Html.DisplayNameFor(m => m.Fecha_Adquisicion)
+    </th>
+    -->
+                <td>
+                    @Html.DisplayFor(m => item.No_)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Marca.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Categoria.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.RutaFoto)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Estado)
+                </td>
+                <!--
+
+                <th class="text-white bg-dark">
+                    @Html.DisplayNameFor(m => m.Motivo_Baja)
+                </th>
+
+                -->
+                <td>
+                    @Html.DisplayFor(m => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Proveedor.Nombre)
+                </td>
+
+                <td>
+                    <partial name="_TableButtonPartial" model="item.Id" />
+                </td>
+            </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>No Existen Activos Registrados</p>
+        }
+    </div>
+    <div class="col-2 text-right">
+        <partial name="_MenuInventario" />
+    </div>
+
+</div>

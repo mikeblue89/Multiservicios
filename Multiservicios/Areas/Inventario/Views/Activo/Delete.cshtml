@@ -1,0 +1,63 @@
+﻿@model Multiservicios.Models.ViewModels.Activo_Categoria_Marca_ProveedorViewModel
+@using Multiservicios.Extensions
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Eliminar Activos</h2>
+<br />
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<div class="border backgroundWhite row">
+    <div class="col-8 border-right">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Activo.CategoriaId" />
+            <input type="hidden" asp-for="Activo.ProveedorId" />
+            <input type="hidden" asp-for="Activo.MarcaId" />
+
+            <input type="hidden" asp-for="Activo.Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Activo.CategoriaId" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <select id="ddlCategorialist" asp-for="Activo.CategoriaId" disabled asp-items="Model.CategoriaList.ToSelectListITem(Model.Activo.CategoriaId)" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Activo.MarcaId" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <select id="ddlMarcalist" asp-for="Activo.MarcaId" disabled asp-items="Model.MarcaList.ToSelectListITem(Model.Activo.MarcaId)" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Activo.ProveedorId" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <select id="ddlProveedorlist" asp-for="Activo.ProveedorId" disabled asp-items="Model.ProveedorList.ToSelectListITem(Model.Activo.ProveedorId)" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Activo.Nombre" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Activo.Nombre" disabled class="form-control" />
+                </div>
+                <span asp-validation-for="Activo.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-5 offset-3">
+                    <partial name="_DeleteAndBackToListButton" model="Model.Activo.Id" />
+                </div>
+            </div>
+        </form>
+    </div>
