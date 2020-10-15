@@ -96,24 +96,14 @@ namespace Multiservicios.Areas.Inventario.Controllers
                 return NotFound();
             }
 
-            var Activo = await _db.Activo.SingleOrDefaultAsync(m => m.Id == id);
+            ActivoItemVm.Activo = await _db.Activo.Include(m => m.Categoria).Include(m => m.Marca).Include(m => m.Proveedor).SingleOrDefaultAsync(m => m.Id == id);
 
-            if (Activo == null)
+            if (ActivoItemVm == null)
             {
                 return NotFound();
             }
-            
 
-            Activo_Categoria_Marca_ProveedorViewModel model = new Activo_Categoria_Marca_ProveedorViewModel()
-            {
-                MarcaList = await _db.Marca.ToListAsync(),
-                CategoriaList = await _db.Categoria.ToListAsync(),
-                ProveedorList = await _db.Proveedor.ToListAsync(),
-               Activo = Activo,
-                ActivoList = await _db.Activo.OrderBy(p => p.Nombre).Select(p => p.Nombre).Distinct().ToListAsync()
-            };
-
-            return View(model);
+            return View(ActivoItemVm);
 
         }
 
@@ -121,18 +111,28 @@ namespace Multiservicios.Areas.Inventario.Controllers
         //POST - EDITAR
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int? Id)
+        public async Task<IActionResult> EditPost(int? id)
         {
-            if (Id == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                var model = _db.Activo.Include(x => x.Categoria).Include(x => x.Marca).Include(x => x.Proveedor).FirstOrDefault();
+            var activoItemFromDb = await _db.Activo.FindAsync(ActivoItemVm.Activo.Id);
+            activoItemFromDb.Nombre = ActivoItemVm.Activo.Nombre;
+            activoItemFromDb.Cantidad = ActivoItemVm.Activo.Cantidad;
+            activoItemFromDb.Fecha_Adquisicion = ActivoItemVm.Activo.Fecha_Adquisicion;
+            activoItemFromDb.No_ = ActivoItemVm.Activo.No_;
+            activoItemFromDb.MarcaId = ActivoItemVm.Activo.MarcaId;
+            activoItemFromDb.CategoriaId = ActivoItemVm.Activo.CategoriaId;
+            activoItemFromDb.RutaFoto = ActivoItemVm.Activo.RutaFoto;
+            activoItemFromDb.Estado = ActivoItemVm.Activo.Estado;
+            activoItemFromDb.Motivo_Baja = ActivoItemVm.Activo.Motivo_Baja;
+            activoItemFromDb.Descripcion = ActivoItemVm.Activo.Descripcion;
+            activoItemFromDb.ProveedorId = ActivoItemVm.Activo.ProveedorId;
+            activoItemFromDb.Fecha_Modificacion = ActivoItemVm.Activo.Fecha_Modificacion;
+            activoItemFromDb.Usuario_Modificacion = ActivoItemVm.Activo.Usuario_Modificacion;
 
-                   }
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
