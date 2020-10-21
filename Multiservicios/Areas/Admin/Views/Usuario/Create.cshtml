@@ -1,0 +1,144 @@
+﻿@model Multiservicios.Models.ViewModels.UsuarioItemViewModel
+@using Multiservicios.Extensions
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-warning">
+    Crear Usuario
+</h2>
+<br />
+
+<form method="post" enctype="multipart/form-data">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario.Nombre" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Usuario.Nombre" class="form-control" />
+            </div>
+            <span asp-validation-for="Usuario.Nombre" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario.Telefono" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Usuario.Telefono" class="form-control" />
+            </div>
+            <span asp-validation-for="Usuario.Telefono" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario.Correo" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Usuario.Correo" class="form-control" />
+            </div>
+            <span asp-validation-for="Usuario.Correo" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario.Role" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <select asp-for="Usuario.Role" id="Role" name="Role" class="form-control">
+                    <option value="" selected>Eliga una opcion</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Ventas">Ventas</option>
+                    <option value="Tecnico">Tecnico</option>
+                    <option value="Bodega">Bodega</option>
+                    <option value="Gerencia">Gerencia</option>
+                </select>
+            </div>
+            <span asp-validation-for="Usuario.Role" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario.PuestoId" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <select asp-for="@Model.Usuario.PuestoId" id="PuestoId" asp-items="Model.Puesto.ToSelectListITem(Model.Usuario.PuestoId)" class="form-control"></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario.DepartamentoId" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <select asp-for="@Model.Usuario.DepartamentoId" id="DepartamentoId" asp-items="Model.Departamento.ToSelectListITem(Model.Usuario.DepartamentoId)" class="form-control"></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario.AreaTrabajoId" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <select asp-for="@Model.Usuario.AreaTrabajoId" name="AreaTrabajoId" id="AreaTrabajoId" asp-items="@(new SelectList(string.Empty,"Id","Nombre"))" class="form-control"></select>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Usuario.Password" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input type="password" asp-for="Usuario.Password" class="form-control" />
+            </div>
+            <span asp-validation-for="Usuario.Password" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_CreateBackToListButton" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getAreaTrabajo();
+            $('#DepartamentoId').change(function () {
+                getAreaTrabajo();
+            });
+        });
+
+        function getAreaTrabajo() {
+            var url = '@Url.Content("~/")' + "Admin/AreaTrabajo/GetAreaTrabajo";
+            var ddlsoruce = '#DepartamentoId';
+            $.getJSON(url, { id: $(ddlsoruce).val() }, function (data) {
+                var items = '';
+                $('#AreaTrabajoId').empty();
+                $.each(data, function (i, areatrabajo) {
+                    items += "<option value='" + areatrabajo.value + "'>" + areatrabajo.text + "</option>";
+                });
+                $('#AreaTrabajoId').html(items);
+            })
+        }
+
+    </script>
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
