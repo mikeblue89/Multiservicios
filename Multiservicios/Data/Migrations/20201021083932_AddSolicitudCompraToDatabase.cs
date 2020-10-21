@@ -1,0 +1,61 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace Multiservicios.Data.Migrations
+{
+    public partial class AddSolicitudCompraToDatabase : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.CreateTable(
+                name: "SolicitudCompra",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(nullable: false),
+                    Cantidad = table.Column<string>(nullable: true),
+                    Descripcion = table.Column<string>(nullable: true),
+                    Estado = table.Column<string>(nullable: true),
+                    MarcaId = table.Column<int>(nullable: false),
+                    CategoriaId = table.Column<int>(nullable: false),
+                    Fecha_Creacion = table.Column<DateTime>(nullable: false),
+                    Usuario_Creacion = table.Column<string>(nullable: true),
+                    Fecha_Modificacion = table.Column<DateTime>(nullable: false),
+                    Usuario_Modificacion = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SolicitudCompra", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SolicitudCompra_Categoria_CategoriaId",
+                        column: x => x.CategoriaId,
+                        principalTable: "Categoria",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SolicitudCompra_Marca_MarcaId",
+                        column: x => x.MarcaId,
+                        principalTable: "Marca",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SolicitudCompra_CategoriaId",
+                table: "SolicitudCompra",
+                column: "CategoriaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SolicitudCompra_MarcaId",
+                table: "SolicitudCompra",
+                column: "MarcaId");
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "SolicitudCompra");
+        }
+    }
+}

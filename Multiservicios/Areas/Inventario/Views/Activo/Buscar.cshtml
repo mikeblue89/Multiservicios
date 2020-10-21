@@ -1,0 +1,173 @@
+﻿@model Multiservicios.Models.ViewModels.Activo_Categoria_Marca_ProveedorViewModel
+@using Multiservicios.Extensions
+        ViewData["Title"] = "Buscar";
+    }
+
+    <h1>Actualizar Activos</h1>
+    <form asp-action="Buscar" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Nombre Activo: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Buscar" class="btn btn-success" />
+            </p>
+        </div>
+
+    </form>
+
+    <h1>Editar Activo</h1>
+    <br />
+    <br />
+    <!--
+        <partial name="_StatusMessage" model="Model.StatusMessage" />
+    -->
+
+    <div class="border backgroundWhite row">
+        <div class="col-6 border-right">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="Activo.Id" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Activo.Id" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Activo.Id" class="form-control" />
+                    </div>
+
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label asp-for="Activo.Id" class="col-form-label"></label>
+                    </div>
+                    <div class="col-5">
+                        <select value="@ViewData["CurrentFilter"]" asp-for="@Model.Activo.Id" id="CategoriaId"  asp-items="Model.ActivoList.ToSelectListITem(Model.Activo.CategoriaId)" class="form-control"></select>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label asp-for="Activo.CategoriaId" class="col-form-label"></label>
+                    </div>
+                    <div class="col-5">
+                        <select asp-for="@Model.Activo.CategoriaId" id="CategoriaId" disabled asp-items="Model.CategoriaList.ToSelectListITem(Model.Activo.CategoriaId)" class="form-control"></select>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Activo.CategoriaId" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Activo.Nombre" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Activo.Nombre" disabled class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Activo.Cantidad" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Activo.Cantidad" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Activo.Cantidad" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Activo.No_" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Activo.No_" disabled class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Activo.Estado" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Activo.Estado" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Activo.Estado" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Activo.MarcaId" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Activo.ProveedorId" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Activo.Descripcion" class="col-form-label"></label>
+                    </div>
+                    <div class="col-6">
+                        @Html.TextAreaFor(m => m.Activo.Descripcion)
+                    </div>
+                    <span asp-validation-for="Activo.Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4">
+                        <partial name="_EditAndBackToListButton" />
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+    @section Scripts{
+
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+        <!--
+                  Caja de Texto: Descripcion
+                -->
+
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: "lists",
+                menubar: 'file edit format'
+            });
+        </script>
+    }

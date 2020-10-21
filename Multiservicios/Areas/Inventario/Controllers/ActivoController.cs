@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Multiservicios.Data;
 using Multiservicios.Models;
@@ -34,6 +35,7 @@ namespace Multiservicios.Areas.Inventario.Controllers
                 Activo = new Models.Activo()
             };
         }
+        public IFormFile Foto { get; set; }
 
         // GET INDEX
         public async Task<IActionResult> Index()
@@ -84,58 +86,49 @@ namespace Multiservicios.Areas.Inventario.Controllers
             };
             return View(modelVm);
         }
-        
-                
+
+
 
         //GET - EDITAR
         public async Task<IActionResult> Edit(int? id)
         {
-            
+
             if (id == null)
             {
                 return NotFound();
             }
 
             ActivoItemVm.Activo = await _db.Activo.Include(m => m.Categoria).Include(m => m.Marca).Include(m => m.Proveedor).SingleOrDefaultAsync(m => m.Id == id);
+            ActivoItemVm.Categoria = await _db.Categoria.Where(s => s.Id == ActivoItemVm.Activo.CategoriaId).ToListAsync();
+            ActivoItemVm.Marca = await _db.Marca.Where(s => s.Id == ActivoItemVm.Activo.MarcaId).ToListAsync();
+            ActivoItemVm.Proveedor = await _db.Proveedor.Where(s => s.Id == ActivoItemVm.Activo.ProveedorId).ToListAsync();
 
             if (ActivoItemVm == null)
-            {
-                return NotFound();
-            }
+                {
+                    return NotFound();
+                }
+
 
             return View(ActivoItemVm);
 
         }
 
-
-        //POST - EDITAR
-        [HttpPost]
+        
+        // POST - EDIT
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int? id)
+        public async Task<IActionResult> Edit(Activo activo)
         {
-            if (id == null)
+            
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                _db.Update(activo);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-
-            var activoItemFromDb = await _db.Activo.FindAsync(ActivoItemVm.Activo.Id);
-            activoItemFromDb.Nombre = ActivoItemVm.Activo.Nombre;
-            activoItemFromDb.Cantidad = ActivoItemVm.Activo.Cantidad;
-            activoItemFromDb.Fecha_Adquisicion = ActivoItemVm.Activo.Fecha_Adquisicion;
-            activoItemFromDb.No_ = ActivoItemVm.Activo.No_;
-            activoItemFromDb.MarcaId = ActivoItemVm.Activo.MarcaId;
-            activoItemFromDb.CategoriaId = ActivoItemVm.Activo.CategoriaId;
-            activoItemFromDb.RutaFoto = ActivoItemVm.Activo.RutaFoto;
-            activoItemFromDb.Estado = ActivoItemVm.Activo.Estado;
-            activoItemFromDb.Motivo_Baja = ActivoItemVm.Activo.Motivo_Baja;
-            activoItemFromDb.Descripcion = ActivoItemVm.Activo.Descripcion;
-            activoItemFromDb.ProveedorId = ActivoItemVm.Activo.ProveedorId;
-            activoItemFromDb.Fecha_Modificacion = ActivoItemVm.Activo.Fecha_Modificacion;
-            activoItemFromDb.Usuario_Modificacion = ActivoItemVm.Activo.Usuario_Modificacion;
-
-            await _db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View(activo);
         }
+
 
         //GET - DELETE
         public async Task<IActionResult> Delete(int? id)
@@ -176,6 +169,21 @@ namespace Multiservicios.Areas.Inventario.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        //Editar Aparte
+        public IActionResult Buscar(string searchString)
+        {
+            ViewData["CurrentFilter"] = searchString;
+
+            var activos = from s in _db.Activo select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                activos = activos.Where(s => s.Nombre.Contains(searchString));
+            }
+
+            return View();
+
+        }
 
 
 

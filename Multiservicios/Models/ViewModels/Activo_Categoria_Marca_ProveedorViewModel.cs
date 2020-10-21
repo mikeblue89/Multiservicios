@@ -13,5 +13,7 @@ namespace Multiservicios.Models.ViewModels
         public Activo Activo { get; set; }
         public List<string> ActivoList { get; set; }
         public string StatusMessage { get; set; }
+
+       
     }
 }

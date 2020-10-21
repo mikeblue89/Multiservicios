@@ -10,9 +10,10 @@
 
 <br />
 <br />
-<div class="border backgroundWhite">
+<!--
+    <div class="border backgroundWhite">
     <div class="col-6 border-right">
-        <form  asp-action="Create">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group row">
@@ -103,6 +104,16 @@
             </div>
 
             <div class="form-group row">
+                <label asp-for="Activo.RutaFoto" class="col-4 col-form-label"></label>
+                <div class="col-8">
+                    <div class="custom-file">
+                        <input asp-for="Activo.RutaFoto" class="form-control  custom-file-input" />
+                        <label class="custom-file-label">Seleccionar imagen</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <div class="col-8 offset-4">
                     <partial name="_CreateBackToListButton" />
                 </div>
@@ -112,22 +123,150 @@
 
     </div>
 
+
 </div>
 
-@section Scripts{
 
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    
-    <!--
-              Caja de Texto: Descripcion
-            -->
+-->
 
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: "lists",
-            menubar: 'file edit format'
-        });
-    </script>
-}
+<form method="post" enctype="multipart/form-data">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Activo.CategoriaId" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <select id="ddlCategorialist" asp-for="Activo.CategoriaId" asp-items="Model.Categoria.ToSelectListITem(Model.Activo.CategoriaId)" class="form-control"></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Activo.Nombre" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Activo.Nombre" class="form-control" />
+            </div>
+            <span asp-validation-for="Activo.Nombre" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Activo.Cantidad" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Activo.Cantidad" class="form-control" />
+            </div>
+            <span asp-validation-for="Activo.Cantidad" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Activo.Fecha_Adquisicion" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input type="date" data-val="true" asp-for="Activo.Nombre" class="form-control" />
+            </div>
+            <span asp-validation-for="Activo.Fecha_Adquisicion" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Activo.No_" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Activo.No_" class="form-control" />
+            </div>
+            <span asp-validation-for="Activo.No_" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Activo.Estado" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Activo.Estado" class="form-control" />
+            </div>
+            <span asp-validation-for="Activo.Estado" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Activo.MarcaId" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <select id="ddlMarcalist" asp-for="Activo.MarcaId" asp-items="Model.Marca.ToSelectListITem(Model.Activo.MarcaId)" class="form-control"></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Activo.ProveedorId" class="col-form-label"></label>
+            </div>
+            <div class="col-8">
+                <select id="ddlProveedorlist" asp-for="Activo.ProveedorId" asp-items="Model.Proveedor.ToSelectListITem(Model.Activo.ProveedorId)" class="form-control"></select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Activo.Descripcion" class="col-form-label"></label>
+            </div>
+            <div class="col-6">
+                @Html.TextAreaFor(m => m.Activo.Descripcion)
+            </div>
+            <span asp-validation-for="Activo.Descripcion" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Activo.RutaFoto" class="col-4 col-form-label"></label>
+            <div class="col-8">
+                <div class="custom-file">
+                    <input asp-for="Activo.RutaFoto" class="form-control  custom-file-input" />
+                    <label class="custom-file-label">Seleccionar imagen</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-8 offset-4">
+                <partial name="_CreateBackToListButton" />
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+    @section Scripts{
+
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+        <!--
+                  Caja de Texto: Descripcion
+                -->
+
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: "lists",
+                menubar: 'file edit format'
+            });
+        </script>
+
+        <!--
+                      Imagen
+                    -->
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-imput').on("change", function () {
+                    var fileName = $(this).val.split("\\").pop();
+                    $(this).next('.custom-fi;e-label').html(fileName);
+                });
+            });
+        </script>
+    }
