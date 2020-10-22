@@ -21,7 +21,8 @@ namespace Multiservicios.Data
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
         public DbSet<Activo> Activo { get; set; }
-        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Usuario> Usuario { get; set; } 
+        public DbSet<SolicitudCompra> SolicitudCompra { get; set; }
     }
  
 }
