@@ -10,14 +10,14 @@ namespace Multiservicios.Data.Migrations
                 name: "TipoSolicitud",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(nullable: true),
                     DESCRIPCION = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoSolicitud", x => x.ID);
+                    table.PrimaryKey("PK_TipoSolicitud", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,7 +52,7 @@ namespace Multiservicios.Data.Migrations
                         name: "FK_Tickets_TipoSolicitud_ID_TIPO_SOLICITUD",
                         column: x => x.ID_TIPO_SOLICITUD,
                         principalTable: "TipoSolicitud",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 

@@ -9,7 +9,7 @@ namespace Multiservicios.Models
     public class TipoSolicitud
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public string DESCRIPCION { get; set; }
     }
