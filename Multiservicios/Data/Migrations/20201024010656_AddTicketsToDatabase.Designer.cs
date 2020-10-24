@@ -10,7 +10,7 @@ using Multiservicios.Data;
 namespace Multiservicios.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201023233831_AddTicketsToDatabase")]
+    [Migration("20201024010656_AddTicketsToDatabase")]
     partial class AddTicketsToDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -562,7 +562,7 @@ namespace Multiservicios.Data.Migrations
                     b.Property<string>("DESCRIPCION")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NOMBRE_SOLICITUD")
+                    b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");

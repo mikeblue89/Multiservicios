@@ -560,7 +560,7 @@ namespace Multiservicios.Data.Migrations
                     b.Property<string>("DESCRIPCION")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NOMBRE_SOLICITUD")
+                    b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");

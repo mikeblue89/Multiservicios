@@ -12,7 +12,7 @@ namespace Multiservicios.Data.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NOMBRE_SOLICITUD = table.Column<string>(nullable: true),
+                    Nombre = table.Column<string>(nullable: true),
                     DESCRIPCION = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

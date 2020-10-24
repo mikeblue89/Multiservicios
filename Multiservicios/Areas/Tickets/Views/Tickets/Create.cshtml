@@ -29,9 +29,6 @@
 
         </div>
 
-
-
-
         <div class="form-group row">
             <div class="col-4">
                 <select id="ddlCategorialist" asp-for="Tickets.ID_ACTIVO" asp-items="Model.Activo.ToSelectListITem(Model.Tickets.ID_ACTIVO)" class="form-control"></select>
@@ -43,7 +40,7 @@
             <span asp-validation-for="Tickets.NO_SERIE" class="text-danger"></span>
 
             <div class="col-4">
-                <select id="ddlCategorialist" asp-for="Tickets.ID_TIPO_SOLICITUD" asp-items="Model.TipoSolicitud.ToSelectListITem(Model.Tickets.ID_TIPO_SOLICITUD)" class="form-control"></select>
+                <select  asp-for="Tickets.ID_TIPO_SOLICITUD" asp-items="Model.TipoSolicitud.ToSelectListITem(Model.Tickets.ID_TIPO_SOLICITUD)" class="form-control"></select>
             </div>
 
         </div>
