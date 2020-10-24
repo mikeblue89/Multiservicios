@@ -26,19 +26,43 @@
                     <th class="text-white bg-dark">
                         @Html.DisplayNameFor(m => m.NO_SERIE)
                     </th>
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.ID_TIPO_SOLICITUD)
+                    </th>
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.TIPO_SERVICIO)
+                    </th>
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.USUARIO_CREACION)
+                    </th>
+                    <th class="text-white bg-dark">
+                        @Html.DisplayNameFor(m => m.ESTADO)
+                    </th>
                     <th class="bg-dark"></th>
                     <th class="bg-dark"></th>
                 </tr>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(m => item.NO_SERIE)
-                        </td>
-                        <td>
-                            <partial name="_TableButtonPartial" model="item.ID" />
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.NO_SERIE)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.ID_TIPO_SOLICITUD)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.TIPO_SERVICIO)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.USUARIO_CREACION)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.ESTADO)
+                </td>
+                <td>
+                    <partial name="_TableButtonPartial" model="item.ID" />
+                </td>
+            </tr>
                 }
             </table>
         }

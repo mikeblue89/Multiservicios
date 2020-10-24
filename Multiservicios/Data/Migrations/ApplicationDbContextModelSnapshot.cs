@@ -532,6 +532,9 @@ namespace Multiservicios.Data.Migrations
                     b.Property<string>("NO_SERIE")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TIPO_SERVICIO")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("USUARIO_ASIGNACION")
                         .HasColumnType("int");
 
@@ -552,7 +555,7 @@ namespace Multiservicios.Data.Migrations
 
             modelBuilder.Entity("Multiservicios.Models.TipoSolicitud", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -563,7 +566,7 @@ namespace Multiservicios.Data.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("TipoSolicitud");
                 });

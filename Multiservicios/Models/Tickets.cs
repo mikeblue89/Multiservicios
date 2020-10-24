@@ -27,6 +27,8 @@ namespace Multiservicios.Models
        public virtual TipoSolicitud TipoSolicitud { get; set; }
 
         public string NO_SERIE { get; set; }
+
+        public string TIPO_SERVICIO { get; set; }
         public int USUARIO_ASIGNACION { get; set; }
         public int ID_ACTIVIDAD { get; set; }
         public string DESCRIPCION { get; set; }

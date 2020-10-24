@@ -16,15 +16,15 @@
 
         <div class="form-group row">
             <div class="col-4">
-                <label asp-for="Tickets.ID_ACTIVO" class="col-form-label"></label>
+                <label  class="col-form-label">Tipo Activo</label>
             </div>
 
             <div class="col-4">
-                <label asp-for="Tickets.NO_SERIE" class="col-form-label"></label>
+                <label  class="col-form-label">No. Serie</label>
             </div>
 
             <div class="col-4">
-                <label asp-for="Tickets.ID_TIPO_SOLICITUD" class="col-form-label"></label>
+                <label  class="col-form-label">Tipo Solicitud</label>
             </div>
 
         </div>
@@ -40,58 +40,66 @@
             <span asp-validation-for="Tickets.NO_SERIE" class="text-danger"></span>
 
             <div class="col-4">
-                <select  asp-for="Tickets.ID_TIPO_SOLICITUD" asp-items="Model.TipoSolicitud.ToSelectListITem(Model.Tickets.ID_TIPO_SOLICITUD)" class="form-control"></select>
+                <select asp-for="Tickets.ID_TIPO_SOLICITUD" asp-items="Model.TipoSolicitud.ToSelectListITem(Model.Tickets.ID_TIPO_SOLICITUD)" class="form-control"></select>
             </div>
 
         </div>
 
+
         <div class="form-group row">
-            <div class="col-4">
+            <!--div class="col-4">
                 <label asp-for="Tickets.ID_ACTIVO" class="col-form-label"></label>
-            </div>
+            </div-->
 
-            <div class="col-8">
-                <label asp-for="Tickets.ID_TIPO_SOLICITUD" class="col-form-label"></label>
-            </div>
-
-        </div>
-
-        <div class="form-group row">
             <div class="col-4">
-                <select id="ddlCategorialist" asp-for="Tickets.ID_ACTIVO" asp-items="Model.Activo.ToSelectListITem(Model.Tickets.ID_ACTIVO)" class="form-control"></select>
+                <label  class="col-form-label">Tipo Servicio</label>
             </div>
 
-
-            <div class="col-8">
-                <input asp-for="Tickets.ID_TIPO_SOLICITUD" class="form-control" />
-            </div>
-            <span asp-validation-for="Tickets.ID_TIPO_SOLICITUD" class="text-danger"></span>
 
         </div>
 
         <div class="form-group row">
+            <!--div class="col-4">
+        <div class="form-group">
+        <select id="ddlCategorialist" asp-for="Tickets.ID_ACTIVO" asp-items="Model.Activo.ToSelectListITem(Model.Tickets.ID_ACTIVO)" class="form-control"></select>
+        </div>
+    </div-->
             <div class="col-4">
-                <label asp-for="Tickets.DESCRIPCION" class="col-form-label"></label>
+                <select asp-for="Tickets.TIPO_SERVICIO" id="TIPO_SERVICIO" name="TIPO_SERVICIOSelect" class="form-control">
+                    <option value="" selected>Eliga una opcion</option>
+                    <option value="Mantenimiento">Mantenimiento</option>
+                    <option value="Servicio">Servicio</option>
+                </select>
+
+                <span asp-validation-for="Tickets.TIPO_SERVICIO" class="text-danger"></span>
+
             </div>
+
         </div>
 
-
-        <div class="form-group row">
-            <div class="col-12">
-                @Html.TextAreaFor(m => m.Tickets.DESCRIPCION)
+            <div class="form-group row">
+                <div class="col-4">
+                    <label class="col-form-label">Descripcion</label>
+                </div>
             </div>
-            <span asp-validation-for="Tickets.DESCRIPCION" class="text-danger"></span>
-        </div>
 
-        <br>
 
-        <div class="form-group row">
-            <div class="col-12">
-                <partial name="_CreateBackToListButton" />
+            <div class="form-group row">
+                <div class="col-12">
+                    @Html.TextAreaFor(m => m.Tickets.DESCRIPCION)
+                </div>
+                <span asp-validation-for="Tickets.DESCRIPCION" class="text-danger"></span>
             </div>
-        </div>
 
-    </div>
+            <br>
+
+            <div class="form-group row">
+                <div class="col-12">
+                    <partial name="_CreateBackToListButton" />
+                </div>
+            </div>
+
+        </div>
 </form>
 
 @section Scripts{

@@ -50,39 +50,24 @@ namespace Multiservicios.Areas.Tickets.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Tickets_ActivoViewModel model)
         {
-            if (ModelState.IsValid)
+
+            TicketsItemVm.Tickets.TIPO_SERVICIO = Request.Form["TIPO_SERVICIO"].ToString();
+
+            if (!ModelState.IsValid)
             {
-                
-                    _db.Tickets.Add(model.Tickets);
-                    await _db.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                
+                return View(TicketsItemVm);
             }
 
-            Tickets_ActivoViewModel modelVm = new Tickets_ActivoViewModel()
-            {
-                ActivoList = await _db.Activo.ToListAsync(),
-                TipoSolicitudList = await _db.TipoSolicitud.ToListAsync(),
-                Tickets = model.Tickets,
-                //TicketsList = await _db.Tickets.OrderBy(p => p.ID_ACTIVO).Select(p => p.ID_PROCESO).ToListAsync(),
-                StatusMessage = StatusMessage
+            TicketsItemVm.Tickets.FECHA_CREACION = DateTime.Now.ToString();
+            TicketsItemVm.Tickets.TIPO_SERVICIO = Request.Form["TIPO_SERVICIOSelect"].ToString();
+            TicketsItemVm.Tickets.USUARIO_CREACION = 5005;
+            TicketsItemVm.Tickets.ESTADO = "Activo";
 
-            };
-            return View(modelVm);
+            _db.Tickets.Add(TicketsItemVm.Tickets);
+            await _db.SaveChangesAsync();
 
+            return RedirectToAction(nameof(Index));
 
-
-
-
-            //if (ModelState.IsValid)
-            //{
-            //    //if valid
-            //    _db.Tickets.Add(model.Tickets);
-            //    await _db.SaveChangesAsync();
-            //
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //return View(modelVm);
         }
 
         //GET - EDIT
