@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Multiservicios.Data;
 using Multiservicios.Models;
+using Multiservicios.Utility;
 
 namespace Multiservicios.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.AdminUser)]
     public class DepartamentoController : Controller
     {
 

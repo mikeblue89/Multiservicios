@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Multiservicios.Utility
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,23 +22,51 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse rightPosition">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark text-center font-weight-bold ajuste" asp-area="" asp-controller="Home" asp-action="Inventario"><img src="~/images/Inventario.png" /><br />Inventario</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark text-center font-weight-bold ajuste" asp-area="" asp-controller="Home" asp-action="Ticket"><img src="~/images/Ticket.png" /><br />Ticket</a>
-                        </li>
-                        <li class="nav-item">
 
-                            <a class="nav-link text-dark text-center font-weight-bold ajuste" asp-area="" asp-controller="Home" asp-action="Reportes"><img src="~/images/Reporte.png" /><br />Reporte</a>
+                        @if (User.IsInRole(SD.AdminUser))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark text-center font-weight-bold ajuste" asp-area="" asp-controller="Home" asp-action="Usuario"><img src="~/images/Usuario.png" /><br />Usuario</a>
+                            </li>
+                        }
+                        else
+                        {
+                            if (User.IsInRole(SD.InventoryUser))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark text-center font-weight-bold ajuste" asp-area="" asp-controller="Home" asp-action="Inventario"><img src="~/images/Inventario.png" /><br />Inventario</a>
+                                </li>
+                            }
+                            else
+                            {
+                                if (User.IsInRole(SD.TecnicoUser))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark text-center font-weight-bold ajuste" asp-area="" asp-controller="Home" asp-action="Ticket"><img src="~/images/Ticket.png" /><br />Ticket</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    if (User.IsInRole(SD.ManagerUser))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark text-center font-weight-bold ajuste" asp-area="" asp-controller="Home" asp-action="Reportes"><img src="~/images/Reporte.png" /><br />Reporte</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        if (User.IsInRole(SD.ContabilidadUser))
+                                        {
+                                            <li class="nav-item">
+                                                <a class="nav-link text-dark text-center font-weight-bold ajuste" asp-area="" asp-controller="Home" asp-action="Compra"><img src="~/images/Compra.png" /><br />Compras</a>
+                                            </li>
+                                        }
+                                    }
+                                }
+                            }
+                        }
 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark text-center font-weight-bold ajuste" asp-area="" asp-controller="Home" asp-action="Usuario"><img src="~/images/Usuario.png" /><br />Usuario</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark text-center font-weight-bold ajuste" asp-area="" asp-controller="Home" asp-action="Compra"><img src="~/images/Compra.png" /><br />Compras</a>
-                        </li>
+
                     </ul>
                 </div>
             </div>

@@ -26,6 +26,7 @@ namespace Multiservicios.Data
         public DbSet<Activo> Activo { get; set; }
         public DbSet<Usuario> Usuario { get; set; } 
         public DbSet<SolicitudCompra> SolicitudCompra { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
  
 }
